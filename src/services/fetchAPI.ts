@@ -1,9 +1,10 @@
+import { AxiosResponse } from 'axios';
 import axios from './axios'
+import { GetPostsType, Post } from '@/types/type';
 
-const getPosts = () => {
-    return axios.get('/posts')
-}
-
+const getPosts: GetPostsType = () => {
+    return axios.get<Post[]>('/posts');
+  }
 const requests = {
     getPosts
 }

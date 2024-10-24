@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import queryClient from '@/utils/queryClient';
 import ReactQueryProvider  from "./reactQueryProvider";
+import ClientSidePage from "./clientSidePage";
+import { Box } from "@mui/material";
 
 
 const geistSans = localFont({
@@ -30,7 +31,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ReactQueryProvider >
-          {children}
+          <ClientSidePage/>
+          <Box marginTop={'64px'} height={'calc(100vh - 64px)'}>
+            {children}
+          </Box>
         </ReactQueryProvider>
       </body>
     </html>
