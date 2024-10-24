@@ -14,3 +14,4 @@ export type DrawerBtn={
     name:string;
 }
 export type GetPostsType = () => Promise<AxiosResponse<Post[]>>;
+export type GetSinglePostType = (arg:number) => Promise<AxiosResponse<Post>>;
