@@ -8,6 +8,16 @@ export type Post= {
     title: string
     body: string
 }
+export enum DrawerBtnName {
+    Settings='Settings',
+    List='List'
+}
+
+export type User={
+    role:Role;
+    username:string;
+    password:string
+}
 
 export enum Role{
     user = 1,
@@ -16,7 +26,7 @@ export enum Role{
 
 export type DrawerBtn={
     icon:OverridableComponent<SvgIconTypeMap<{}, "svg">>;
-    name:string;
+    name:DrawerBtnName;
 }
 export type GetPostsType = () => Promise<AxiosResponse<Post[]>>;
 export type GetSinglePostType = (arg:number) => Promise<AxiosResponse<Post>>;

@@ -1,11 +1,11 @@
 'use client'
 import MyDrawer from '@/components/drawer';
 import React, { useState } from 'react';
-import { AppBar, IconButton, Toolbar, Popper, Paper, MenuList, MenuItem, ClickAwayListener } from '@mui/material';
+import { AppBar, IconButton, Toolbar, Popper, Paper, MenuList, MenuItem, ClickAwayListener, Grow } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { List, Settings } from '@mui/icons-material';
-import { DrawerBtn, Role } from '@/types/type';
+import { DrawerBtn, DrawerBtnName, Role } from '@/types/type';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
@@ -19,8 +19,8 @@ const ClientSidePage: React.FC<ClientSidePageProps> = ({ role }) => {
   const router = useRouter();
 
   const drawerBtnList: DrawerBtn[] = role === Role.admin ? 
-    [{ icon: List, name: 'List' }, { icon: Settings, name: 'Settings' }] : 
-    [{ icon: List, name: 'List' }];
+    [{ icon: List, name: DrawerBtnName.List }, { icon: Settings, name: DrawerBtnName.Settings }] : 
+    [{ icon: List, name: DrawerBtnName.List }];
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -50,26 +50,28 @@ const ClientSidePage: React.FC<ClientSidePageProps> = ({ role }) => {
   return (
     <div>
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar sx={{display:'flex',justifyContent:'space-between'}}>
           <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle}>
             <MenuIcon />
           </IconButton>
           <IconButton color="inherit" edge="end" onClick={handleAccountIconClick}>
             <AccountCircleIcon />
           </IconButton>
-          <Popper open={open} anchorEl={anchorEl} role={undefined} transition disablePortal>
-            {({ TransitionProps, placement }) => (
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open}>
-                    {role ? (
-                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                    ) : (
-                      <MenuItem onClick={handleLoginRedirect}>Login</MenuItem>
-                    )}
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
+          <Popper open={open} anchorEl={anchorEl} placement="bottom-start" transition disablePortal>
+            {({ TransitionProps }) => (
+              <Grow {...TransitionProps}>
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList autoFocusItem={open}>
+                      {role ? (
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                      ) : (
+                        <MenuItem onClick={handleLoginRedirect}>Login</MenuItem>
+                      )}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
             )}
           </Popper>
         </Toolbar>

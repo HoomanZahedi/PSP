@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import * as yup from 'yup';
 import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { Role } from '@/types/type';
+import { useRouter } from 'next/navigation';
 
 const roleValues = Object.values(Role).filter(value => typeof value === 'number');
 const schema = yup.object().shape({
@@ -21,6 +22,7 @@ type FormData = {
 };
 
 const LoginForm: React.FC = () => {
+  const router = useRouter();
   const {
     handleSubmit,
     control,
@@ -34,6 +36,7 @@ const LoginForm: React.FC = () => {
 
   const onSubmit = (data: FormData) => {
     Cookies.set('userData', JSON.stringify(data), { expires: 1 }); 
+    location.href = '/'
   };
 
   return (
@@ -96,6 +99,9 @@ const LoginForm: React.FC = () => {
         </FormControl>
         <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 3 }}>
           Login
+        </Button>
+        <Button variant="contained" color="secondary" onClick={()=>router.push('/')} fullWidth sx={{ mt: 3 }}>
+          HomePage
         </Button>
       </Box>
     </Container>
