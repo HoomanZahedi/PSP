@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-import {toast} from 'react-toastify'
 const axiosInstance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com', // Replace with your API base URL
+  baseURL: 'https://jsonplaceholder.typicode.com', 
   timeout: 5000,
 });
 
@@ -24,7 +23,7 @@ axiosInstance.interceptors.response.use(
     if (error.response) {
       if (error.response.status === 401) {
         console.error('Unauthorized, redirecting...');
-        // window.location.href = '/login';
+        window.location.href = '/login';
       }
     } else if (error.request) {
         console.error('No response received: ', error.request);
