@@ -5,7 +5,7 @@ import ClientSidePage from "../clientSidePage";
 import { cookies } from 'next/headers';
 import { Box } from "@mui/material";
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
-
+import HydretionProvider from '@/utils/hydrationProvider'
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -16,11 +16,13 @@ export default async function RootLayout({
     const userRole = cookie && cookie.get('userData') && JSON.parse(cookie.get('userData')?.value as string).role;
     
   return (
+    <HydretionProvider>
         <ReactQueryProvider >
           <ClientSidePage role={userRole}/>
           <Box marginTop={'64px'} height={'calc(100vh - 64px)'}>
             {children}
           </Box>
         </ReactQueryProvider>
+    </HydretionProvider>
   );
 }
