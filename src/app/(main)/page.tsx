@@ -21,7 +21,7 @@ export default async function PostsPage() {
       <Typography variant='h3'>Posts</Typography>
       <Grid2 container spacing={2}>
         {posts.map((post) => (
-          <Grid2 size={{ xs: 12, md: 4 }} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Grid2 key={post.id} size={{ xs: 12, md: 4 }} sx={{ display: 'flex', flexDirection: 'column' }}>
             <PostCard  post={post} /> 
           </Grid2 >
         ))}

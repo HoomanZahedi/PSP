@@ -30,12 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ReactQueryProvider >
-          <ClientSidePage/>
-          <Box marginTop={'64px'} height={'calc(100vh - 64px)'}>
             {children}
-          </Box>
-        </ReactQueryProvider>
       </body>
     </html>
   );
