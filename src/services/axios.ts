@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
     if (error.response) {
       if (error.response.status === 401) {
         console.error('Unauthorized, redirecting...');
-        // window.location.href = '/login';
+        window.location.href = '/login';
       }
     } else if (error.request) {
         console.error('No response received: ', error.request);
