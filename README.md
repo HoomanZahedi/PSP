@@ -16,6 +16,6 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-the main branch is the complete project 
-for testing the project you can switch to test branch
-run yarn test for test it on the test branch
+-the main branch is the complete project 
+-for testing the project you can switch to test branch
+-run yarn test for test it on the test branch
